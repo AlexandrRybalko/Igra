@@ -13,7 +13,7 @@ namespace Homework6ConsoleApp
         {
             BasePlayer Winner = new OrdinaryPlayer("");
             int NumberOfPlayers;
-            int Weight = 99;
+            int Weight = new Random().Next(40, 141);
             int NumberOfTries = 0;
             int ClosestGuessedNumber = 0;
             List<int> TriedNumbers = new List<int>();
