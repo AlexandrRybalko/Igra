@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Homework6ClassLibrary
 {
-    /*class CheaterPlayer : IPlayer
+    public class CheaterPlayer : BasePlayer
     {
-        private int[] NotUsedNumbers;
-        public int GuessTheWeight()
+        private List<int> NotUsedNumbers;
+        public override int GuessTheWeight()
         {
-            throw new NotImplementedException();
-        }
-        public CheaterPlayer()
-        {
-            NotUsedNumbers = new int[100];
-            for(int i = 0; i < NotUsedNumbers.Length; i++)
+            Random random = new Random();
+            int result = random.Next(40, 141);
+            while (NotUsedNumbers.Contains(result))
             {
-                NotUsedNumbers[i] = i;
+                result = random.Next(40, 141);
             }
+            return result;
         }
-    }*/
+        public CheaterPlayer(string name,List<int> numbers)
+        {
+            Name = name;
+            NotUsedNumbers = numbers;
+        }
+    }
 }

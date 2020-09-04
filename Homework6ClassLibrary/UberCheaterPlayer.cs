@@ -1,31 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Homework6ClassLibrary
 {
-    public class UberCheaterPlayer : IPlayer
+    public class UberCheaterPlayer : BasePlayer
     {
-        private int[] NotUsedNumbers;
-        private int index;
+        private List<int> NotUsedNumbers;
+        private int CurrentNumber = 40;
         public override int GuessTheWeight()
         {
-            while(NotUsedNumbers[index] == 0)
-            {
-                index += 1;
+            while (NotUsedNumbers.Contains(CurrentNumber))
+            {              
+                CurrentNumber += 1;
             }
-            return NotUsedNumbers[index++];
+            return CurrentNumber++;
         }
-        public UberCheaterPlayer()
+        public UberCheaterPlayer(string name, List<int> numbers)
         {
-            NotUsedNumbers = new int[101];
-            index = 0;
-            for(int i = 0; i < NotUsedNumbers.Length; i++)
-            {
-                NotUsedNumbers[i] = i + 40;
-            }
+            Name = name;
+            NotUsedNumbers = numbers;
         }
     }
 }

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheaterPlayer.cs" />
-    <Compile Include="IPlayer.cs" />
+    <Compile Include="BasePlayer.cs" />
     <Compile Include="OrdinaryPlayer.cs" />
     <Compile Include="PlayerNotepad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,33 +11,76 @@ namespace Homework6ConsoleApp
     {
         static void Main(string[] args)
         {
+            BasePlayer Winner = new OrdinaryPlayer("");
+            int NumberOfPlayers;
+            int Weight = 99;
             int NumberOfTries = 0;
-            bool flag = true;
-            List<IPlayer> players = new List<IPlayer>();
-            int Weight = 136;
-            OrdinaryPlayer op1 = new OrdinaryPlayer("op1");
-            OrdinaryPlayer op2 = new OrdinaryPlayer("op2");
-            PlayerNotepad pn1 = new PlayerNotepad("pn1");
-            PlayerNotepad pn2 = new PlayerNotepad("pn2");
-            players.Add(op1);
-            players.Add(op2);
-            players.Add(pn1);
-            players.Add(pn2);
-            while (flag)
+            int ClosestGuessedNumber = 0;
+            List<int> TriedNumbers = new List<int>();
+            List<BasePlayer> players = new List<BasePlayer>();
+            
+            Console.WriteLine("Enter the number of players(from 2 to 8)");
+            NumberOfPlayers = int.Parse(Console.ReadLine());
+                
+            for(int i = 0; i < NumberOfPlayers; i++)
             {
-                foreach(var player in players)
+                Console.WriteLine("Press 1 to add an ordinary player, 2 - player notepad, 3 - uber player, 4 - cheater, 5 - uber cheater");
+                string PlayerType = Console.ReadLine();
+                Console.WriteLine("Enter player's name");
+                string name = Console.ReadLine();
+                switch (PlayerType)
                 {
-                    NumberOfTries += 1;
-                    int guessedNumber = player.GuessTheWeight();
-                    Console.WriteLine($"{NumberOfTries}. {player.Name}:{guessedNumber}");
-                    if(NumberOfTries == 100 || guessedNumber == Weight)
+                    case "1":
+                        players.Add(new OrdinaryPlayer(name));
+                        break;
+                    case "2":
+                        players.Add(new PlayerNotepad(name));
+                        break;
+                    case "3":
+                        players.Add(new UberPlayer(name));
+                        break;
+                    case "4":
+                        players.Add(new CheaterPlayer(name, TriedNumbers));
+                        break;
+                    case "5":
+                        players.Add(new UberCheaterPlayer(name, TriedNumbers));
+                        break;
+                }
+            }
+
+            bool flag = true;
+            int result;
+            while(flag)
+            {
+                foreach (var player in players)
+                {
+                    result = player.GuessTheWeight();
+
+                    if (!TriedNumbers.Contains(result))
+                    {
+                        TriedNumbers.Add(result);
+                    }
+                    if(ClosestGuessedNumber == 0)
+                    {
+                        ClosestGuessedNumber = result;
+                    }
+                    else
+                    {
+                        if(Math.Abs(Weight - result) < Math.Abs(Weight - ClosestGuessedNumber))
+                        {
+                            ClosestGuessedNumber = result;
+                            Winner = player;
+                        }
+                    }
+                    if (result == Weight || NumberOfTries == 100)
                     {
                         flag = false;
                         break;
                     }
                 }
             }
-            Console.WriteLine(op1.Name);
+            Console.WriteLine(Winner.Name);
+
             Console.ReadKey();
         }
     }

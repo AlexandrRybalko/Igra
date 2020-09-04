@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Homework6ClassLibrary
 {
-    public class PlayerNotepad : IPlayer
+    public class PlayerNotepad : BasePlayer
     {
-        public new string Name;
-        private List<int> UsedNumbers;
+        private List<int> UsedNumbers = new List<int>();
         public override int GuessTheWeight()
         {
             Random random = new Random();
-            int result = random.Next(40, 140);
+            int result = random.Next(40, 141);
             while (UsedNumbers.Contains(result))
             {
-                result = random.Next(40, 140);
+                result = random.Next(40, 141);
             }
+            UsedNumbers.Add(result);
             return result;
         }
         public PlayerNotepad(string name)
         {
-            UsedNumbers = new List<int>();
             Name = name;
         }
     }

@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Homework6ClassLibrary
+﻿namespace Homework6ClassLibrary
 {
-    public class UberPlayer : IPlayer
+    public class UberPlayer : BasePlayer
     {
-        private int CurrentNumber { get; set; }
+        private int currentNumber = 40;
         public override int GuessTheWeight()
         {
-            CurrentNumber += 1;
-            return CurrentNumber;
+            return currentNumber++;
         }
-        public UberPlayer()
+        public UberPlayer(string name)
         {
-            CurrentNumber = 40;
+            Name = name;
         }
     }
 }
